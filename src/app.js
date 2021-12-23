@@ -9,9 +9,9 @@ app.use(express.json());
 app.use('/artist', artistRouter);
 
 
-app.get('/', (req,res)=> {
+/**app.get('/', (req,res)=> {
     res.status(200).json({result:'Hello world Eriq'});
-});
+});**/
 
 
 
