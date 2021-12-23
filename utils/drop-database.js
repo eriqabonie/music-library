@@ -17,19 +17,21 @@ require('dotenv').config({
 });
 
 // destructure environment variables from process.env 
-const { DB_PASSWORD, DB_NAME, DB_USER, DB_HOST, DB_PORT } = process.env;
+const { DB_PASSWORD, DB_NAME, DB_USER, DB_HOST, DB_PORT, CLEARDB_DATABASE_URL } = process.env;
 
 // This asyncronous function will run before app
 const setUpDatabase = async () => {
   try {
 
-    // connect to the database
-    const db = await mysql.createConnection({
-      host: DB_HOST,
-      user: DB_USER,
-      password: DB_PASSWORD,
-      port: DB_PORT,
-    });
+  // connect to the database
+  const db = CLEARDB_DATABASE_URL ?
+  await mysql.createConnection(CLEARDB_DATABASE_URL) :
+  await mysql.createConnection({
+    host: DB_HOST,
+    user: DB_USER,
+    password: DB_PASSWORD,
+    port: DB_PORT,
+  });
 
     // create the database if it doesn't already exist
     await db.query(`DROP DATABASE IF EXISTS ${DB_NAME}`);
