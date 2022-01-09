@@ -11,6 +11,8 @@ const args = process.argv.slice(2)[0];
 // use args to determine if .env or .env.test should be loaded
 const envFile = args === 'test' ? '../.env.test' : '../.env';
 
+
+
 // load environment variables from env files
 require('dotenv').config({
   path: path.join(__dirname, envFile),
@@ -40,6 +42,15 @@ const setUpDatabase = async () => {
       id INT PRIMARY KEY auto_increment,
       name VARCHAR(25),
       genre VARCHAR(25)
+    )`);
+    // creates an Album table with FKey
+    await db.query(`CREATE TABLE IF NOT EXISTS Album (
+      id INT PRIMARY KEY auto_increment,
+      name VARCHAR(25),
+      year INT,
+      artistId INT,
+      CONSTRAINT FK_artistAlbum FOREIGN KEY (artistId)
+      REFERENCES Artist(id)
     )`);
     db.close();
 

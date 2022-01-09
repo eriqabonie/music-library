@@ -31,9 +31,8 @@
     "supertest": "^6.1.6"
   },
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.2",
     "mysql2": "^2.3.3",
-    "swagger": "^0.7.5",
     "swagger-ui-express": "^4.3.0"
   }
 }
